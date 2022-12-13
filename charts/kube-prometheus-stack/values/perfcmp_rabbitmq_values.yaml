@@ -9,7 +9,7 @@ grafana:
 defaultRules:
   create: false
 pushgateway:
-    enabled: false
+  enabled: false
 
 prometheusOperator:
   tolerations:
@@ -29,7 +29,7 @@ prometheus:
   serviceAccount:
     name: "amp-iamproxy-ingest-service-account"
     annotations:
-      eks.amazonaws.com/role-arn: arn:aws:iam::764065228965:role/management-amp-eu-west-1
+      eks.amazonaws.com/role-arn: arn:aws:iam::913061891357:role/perf-cmp-rabbitmq-amp-eu-west-1
 
   prometheusSpec:
     containers:
