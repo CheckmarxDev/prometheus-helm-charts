@@ -71,7 +71,6 @@ prometheus:
     additionalScrapeConfigs:
       - job_name: minio-job
         metrics_path: /minio/v2/metrics/cluster
-        scheme: https
+        scheme: http
         static_configs:
-          - targets:
-              - master.master-cmp-platform-minio.cluster.local:9000
+        - targets: [ master-cmp-platform-minio.master:9000 ]
