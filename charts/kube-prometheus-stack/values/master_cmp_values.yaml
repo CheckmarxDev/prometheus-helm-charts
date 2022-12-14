@@ -9,7 +9,7 @@ grafana:
 defaultRules:
   create: false
 pushgateway:
-    enabled: false
+  enabled: false
 
 prometheusOperator:
   tolerations:
@@ -67,3 +67,11 @@ prometheus:
     walCompression: false
 
     retention: 0d
+
+    additionalScrapeConfigs:
+      - job_name: minio-job
+        metrics_path: /minio/v2/metrics/cluster
+        scheme: https
+        static_configs:
+          - targets:
+              - master.master-cmp-platform-minio.cluster.local:9000
