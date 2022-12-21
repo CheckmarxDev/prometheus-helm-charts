@@ -1,0 +1,76 @@
+## The following is a set of default values for prometheus server helm chart which enable remoteWrite to AMP
+## For the rest of prometheus helm chart values see: https://github.com/prometheus-community/helm-charts/blob/main/charts/prometheus/values.yaml
+##
+
+alertmanager:
+  enabled: false
+grafana:
+  enabled: false
+defaultRules:
+  create: false
+pushgateway:
+  enabled: false
+
+prometheusOperator:
+  tolerations:
+    - key: "infra-tools"
+      operator: "Equal"
+      value: "true"
+      effect: "NoSchedule"
+
+kube-state-metrics:
+  tolerations:
+    - key: "infra-tools"
+      operator: "Equal"
+      value: "true"
+      effect: "NoSchedule"
+
+prometheus:
+  serviceAccount:
+    name: "amp-iamproxy-ingest-service-account"
+    annotations:
+      eks.amazonaws.com/role-arn: arn:aws:iam::602005780816:role/frankfurt-amp-eu-central-1
+
+  prometheusSpec:
+    containers:
+      - name: prometheus
+        args:
+         - --config.file=/etc/prometheus/config_out/prometheus.env.yaml
+         - --enable-feature=agent
+    remoteWrite:
+      - url: https://aps-workspaces.eu-west-1.amazonaws.com/workspaces/ws-4856bd46-d36e-41d8-9d4b-d464e02daa84/api/v1/remote_write
+        sigv4:
+          region: eu-west-1
+          roleArn: arn:aws:iam::764065228965:role/EKS-AMP-Central-Role
+        
+        queueConfig:
+          maxSamplesPerSend: 1000
+          maxShards: 200
+          capacity: 2500
+    
+    externalLabels:
+      cluster_name: frankfurt
+    
+    tolerations:
+      - key: "infra-tools"
+        operator: "Equal"
+        value: "true"
+        effect: "NoSchedule"
+    
+    enableFeatures:
+      - agent
+    
+    ruleSelector: ~
+
+    ruleSelectorNilUsesHelmValues: false
+
+    walCompression: false
+
+    retention: 0d
+
+    additionalScrapeConfigs:
+      - job_name: minio-job
+        metrics_path: /minio/v2/metrics/cluster
+        scheme: http
+        static_configs:
+        - targets: [ master-cmp-platform-minio.master:9000 ]
