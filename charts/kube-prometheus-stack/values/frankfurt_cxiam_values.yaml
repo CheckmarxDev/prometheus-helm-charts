@@ -29,7 +29,7 @@ prometheus:
   serviceAccount:
     name: "amp-iamproxy-ingest-service-account"
     annotations:
-      eks.amazonaws.com/role-arn: arn:aws:iam::602005780816:role/frankfurt-rabbitmq-amp-eu-central-1
+      eks.amazonaws.com/role-arn: arn:aws:iam::842737970584:role/frankfurtcxiam-amp-eu-central-1
 
   prometheusSpec:
     containers:
