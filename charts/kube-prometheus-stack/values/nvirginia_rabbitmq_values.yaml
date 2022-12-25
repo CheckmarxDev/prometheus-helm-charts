@@ -49,7 +49,7 @@ prometheus:
           capacity: 2500
     
     externalLabels:
-      cluster_name: nvirginia-rabbitmq
+      cluster_name: n-virginia-rabbitmq
     
     tolerations:
       - key: "infra-tools"
