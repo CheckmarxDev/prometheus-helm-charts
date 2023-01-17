@@ -67,20 +67,3 @@ prometheus:
     walCompression: false
 
     retention: 0d
-
-    additionalScrapeConfigs:
-      - job_name: 'ec2-metadata'
-        scrape_interval: 15s
-        scrape_timeout: 10s
-        metrics_path: '/metrics'
-        scheme: http
-        ec2_sd_configs:
-          - profile: '${INSTANCE_PROFILE_ARN}'
-            port: 80
-        relabel_configs:
-          - source_labels: [__meta_ec2_instance_id]
-            regex: '${INSTANCE_ID}'
-            action: keep
-          - source_labels: [__meta_ec2_instance_state]
-            regex: '${INSTANCE_STATE}'
-            action: keep
