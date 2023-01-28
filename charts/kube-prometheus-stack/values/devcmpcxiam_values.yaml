@@ -37,6 +37,7 @@ prometheus:
         args:
          - --config.file=/etc/prometheus/config_out/prometheus.env.yaml
          - --enable-feature=agent
+         - --web.enable-lifecycle
     remoteWrite:
       - url: https://aps-workspaces.eu-west-1.amazonaws.com/workspaces/ws-4856bd46-d36e-41d8-9d4b-d464e02daa84/api/v1/remote_write
         sigv4:
@@ -50,6 +51,7 @@ prometheus:
     
     externalLabels:
       cluster_name: devcmpcxiam
+      environemnt: master-cmp
     
     tolerations:
       - key: "infra-tools"
