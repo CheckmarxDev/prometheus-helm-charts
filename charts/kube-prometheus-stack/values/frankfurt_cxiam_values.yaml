@@ -51,7 +51,7 @@ prometheus:
     
     externalLabels:
       cluster_name: frankfurtcxiam
-      environemnt: production
+      environment: production
 
     
     tolerations:

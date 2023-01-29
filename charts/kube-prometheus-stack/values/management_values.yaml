@@ -51,7 +51,7 @@ prometheus:
     
     externalLabels:
       cluster_name: management
-      environemnt: management
+      environment: management
     
     tolerations:
       - key: "infra-tools"

@@ -51,7 +51,7 @@ prometheus:
     
     externalLabels:
       cluster_name: irelandcxiam
-      environemnt: production
+      environment: production
     
     tolerations:
       - key: "infra-tools"

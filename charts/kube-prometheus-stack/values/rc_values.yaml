@@ -52,7 +52,7 @@ prometheus:
     
     externalLabels:
       cluster_name: rc
-      environemnt: rc
+      environment: rc
     
     tolerations:
       - key: "infra-tools"

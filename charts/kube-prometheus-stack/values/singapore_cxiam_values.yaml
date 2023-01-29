@@ -52,7 +52,7 @@ prometheus:
     
     externalLabels:
       cluster_name: singaporecxiam
-      environemnt: production
+      environment: production
     
     tolerations:
       - key: "infra-tools"

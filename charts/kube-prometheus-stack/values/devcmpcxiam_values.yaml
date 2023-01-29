@@ -51,7 +51,7 @@ prometheus:
     
     externalLabels:
       cluster_name: devcmpcxiam
-      environemnt: master-cmp
+      environment: master-cmp
     
     tolerations:
       - key: "infra-tools"

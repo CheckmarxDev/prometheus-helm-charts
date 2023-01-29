@@ -52,7 +52,7 @@ prometheus:
     
     externalLabels:
       cluster_name: perfcmpcxiam
-      environemnt: perf
+      environment: perf
     
     tolerations:
       - key: "infra-tools"
