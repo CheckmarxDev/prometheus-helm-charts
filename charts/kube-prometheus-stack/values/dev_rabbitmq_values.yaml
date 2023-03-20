@@ -11,6 +11,17 @@ defaultRules:
 pushgateway:
     enabled: false
 
+prometheus-node-exporter:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+            - key: eks.amazonaws.com/compute-type
+              operator: NotIn
+              values:
+              - fargate
+
 prometheusOperator:
   tolerations:
     - key: "infra-tools"
@@ -38,6 +49,7 @@ prometheus:
          - --config.file=/etc/prometheus/config_out/prometheus.env.yaml
          - --enable-feature=agent
          - --web.enable-lifecycle
+
     remoteWrite:
       - url: https://aps-workspaces.eu-west-1.amazonaws.com/workspaces/ws-4856bd46-d36e-41d8-9d4b-d464e02daa84/api/v1/remote_write
         sigv4:
@@ -58,16 +70,6 @@ prometheus:
         operator: "Equal"
         value: "true"
         effect: "NoSchedule"
-
-    affinity:
-      nodeAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-            - matchExpressions:
-                - key: eks.amazonaws.com/compute-type
-                  operator: NotIn
-                  values:
-                  - fargate
     
     enableFeatures:
       - agent
